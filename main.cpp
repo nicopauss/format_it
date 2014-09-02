@@ -6,6 +6,7 @@
 #include "format_helpers.hpp"
 #include "format_stl.hpp"
 #include "format_out.hpp"
+#include <iostream>
 #include <string>
 #include <iterator>
 
