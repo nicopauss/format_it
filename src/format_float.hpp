@@ -64,13 +64,13 @@ struct DtoaStart
 template<typename C, typename It, typename T>
 DtoaStart<C, It, T> start_dtoa(format_it<C, It> it, T value)
 {
+	if (std::isnan(value)) return { it.print("nan"), true, value };
 	if (FloatSplit(value).negative)
 	{
 		*it++ = '-';
 		value = -value;
 	}
-	if (std::isnan(value)) return { it.print("nan"), true, value };
-	else if (value == 0.0) return { it.print('0'), true, value };
+	if (value == 0.0) return { it.print('0'), true, value };
 	else if (value == std::numeric_limits<double>::infinity()) return { it.print("inf"), true, value };
 	else return { it, false, value };
 }
