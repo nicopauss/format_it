@@ -21,33 +21,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org/>
 */
 
+#include <gtest/gtest.h>
+
 #include "format_it.hpp"
 
-static const char * reason_to_message(fmt::format_error::Reason reason)
-{
-	switch(reason)
-	{
-	case fmt::format_error::UnusedArgument:
-		return "Not all arguments were used in the format string";
-	case fmt::format_error::PercentNotFollowedByNumber:
-		return "A percent sign '%' was not followed by a number. If you intended to print a percent sign use two percents %%";
-	case fmt::format_error::OpenPercentAtEndOfInput:
-		return "A percent sign '%' was used at the end of the sequence without a number following it. If you intended to print a percent sign use two percents %%";
-	case fmt::format_error::FormatIndexOutOfRange:
-		return "Format index out of range";
-	}
-	// forgot to handle a case in the switch statement above;
-	return "Unknown reason";
-}
-
-fmt::format_error::format_error(Reason reason)
-	: std::runtime_error(reason_to_message(reason)), _reason(reason)
-{
-}
-
-
-#ifndef DISABLE_GTEST
-#include <gtest/gtest.h>
 namespace
 {
 TEST(format_it, format_to_string)
@@ -128,4 +105,4 @@ TEST(format_it, print_separator)
 	ASSERT_EQ("Hello, World, !", print_separated);
 }
 }
-#endif
+

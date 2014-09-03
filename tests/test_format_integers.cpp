@@ -21,11 +21,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org/>
 */
 
-#include "format_integers.hpp"
-
-#ifndef DISABLE_GTEST
 #include <gtest/gtest.h>
 #include "stack_format.hpp"
+#include "format_integers.hpp"
+
 namespace
 {
 TEST(format_int, boolalpha)
@@ -70,4 +69,3 @@ TEST(format_int, oct)
 	ASSERT_EQ(std::string("5 5"), single_oct.c_str());
 }
 }
-#endif

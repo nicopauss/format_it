@@ -21,10 +21,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org/>
 */
 
+#include <gtest/gtest.h>
 #include "format_helpers.hpp"
 
-#ifndef DISABLE_GTEST
-#include <gtest/gtest.h>
 namespace
 {
 TEST(format_helpers, padding)
@@ -104,5 +103,4 @@ TEST(format_helpers, more_complex_value)
 	ASSERT_EQ(" 𝄞𝄞𝄞", pad_middle_triple);
 }*/
 }
-#endif
 

@@ -20,13 +20,11 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org/>
 */
+#include <cstdio>
+#include <gtest/gtest.h>
 
 #include "format_float.hpp"
-
-#ifndef DISABLE_GTEST
-#include <gtest/gtest.h>
 #include "stack_format.hpp"
-#include <cstdio>
 
 namespace
 {
@@ -280,5 +278,4 @@ TEST(format_float, DISABLED_test_all_floats)
 	}
 }
 }
-#endif
 

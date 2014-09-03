@@ -1,14 +1,11 @@
-#ifndef DISABLE_GTEST
-#include <gtest/gtest.h>
-#endif
+#include <iostream>
+#include <string>
+#include <iterator>
 
 #include "stack_format.hpp"
 #include "format_helpers.hpp"
 #include "format_stl.hpp"
 #include "format_out.hpp"
-#include <iostream>
-#include <string>
-#include <iterator>
 
 struct print_through_ostream
 {
@@ -101,9 +98,6 @@ int main(int argc, char * argv[])
 
 	fmt::cout.print(print_both(print_through_ostream(), print_through_format_it())).print('\n');
 
-#ifndef DISABLE_GTEST
-	::testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
-#endif
+  return 0;
 }
 

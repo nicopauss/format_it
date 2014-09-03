@@ -21,10 +21,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org/>
 */
 
-#include "format_stl.hpp"
-
-#ifndef DISABLE_GTEST
-#include <gtest/gtest.h>
 #include <vector>
 #include <set>
 #include <map>
@@ -34,6 +30,11 @@ For more information, please refer to <http://unlicense.org/>
 #include <array>
 #include <unordered_set>
 #include <unordered_map>
+
+#include <gtest/gtest.h>
+
+#include "format_stl.hpp"
+
 namespace
 {
 TEST(format_stl, tuple)
@@ -138,4 +139,3 @@ TEST(format_stl, unordered_map)
 	ASSERT_EQ("{ }", b_empty);
 }
 }
-#endif

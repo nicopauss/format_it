@@ -20,11 +20,10 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org/>
 */
+#include <gtest/gtest.h>
 
 #include "stack_format.hpp"
 
-#ifndef DISABLE_GTEST
-#include <gtest/gtest.h>
 namespace
 {
 TEST(stack_format, simple)
@@ -166,4 +165,3 @@ TEST(stack_format, DISABLED_profile_stringstream)
 	}
 }
 }
-#endif
