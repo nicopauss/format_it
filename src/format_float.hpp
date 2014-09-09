@@ -34,25 +34,11 @@ namespace fmt
 {
 namespace detail
 {
-struct FloatSplit
+inline bool doubleIsNegative(double value)
 {
-	FloatSplit(double as_double)
-		: as_double(as_double)
-	{
-	}
-
-	union
-	{
-		double as_double;
-		struct
-		{
-			uint64_t mantissa : 52;
-			unsigned short exponent : 11;
-			bool negative : 1;
-		};
-	};
-};
-static_assert(sizeof(FloatSplit) == sizeof(double), "I use that struct to look at doubles");
+    const uint64_t* ptr = reinterpret_cast<uint64_t*>(&value);
+    return *ptr & (1ULL << (sizeof(double) * 8 - 1));
+}
 
 template<typename C, typename It, typename T>
 struct DtoaStart
@@ -65,7 +51,7 @@ template<typename C, typename It, typename T>
 DtoaStart<C, It, T> start_dtoa(format_it<C, It> it, T value)
 {
 	if (std::isnan(value)) return { it.print("nan"), true, value };
-	if (FloatSplit(value).negative)
+	if (doubleIsNegative(value))
 	{
 		*it++ = '-';
 		value = -value;
@@ -230,14 +216,14 @@ inline bool round_buffer(char * begin, char * print_end, char * end)
 template<typename C, typename It>
 format_it<C, It> fixed_width_dtoa(format_it<C, It> it, double value, int num_digits)
 {
-	if (FloatSplit(value).negative)
+	if (std::isnan(value)) return std::fill_n(it.print("nan"), std::max(0, num_digits - 3), ' ');
+	if (doubleIsNegative(value))
 	{
 		*it++ = '-';
 		value = -value;
 		--num_digits;
 	}
-	if (std::isnan(value)) return std::fill_n(it.print("nan"), std::max(0, num_digits - 3), ' ');
-	else if (value == 0.0) return std::fill_n(it.print("0."), num_digits - 2, '0');
+	if (value == 0.0) return std::fill_n(it.print("0."), num_digits - 2, '0');
 	else if (value == std::numeric_limits<double>::infinity()) return std::fill_n(it.print("inf"), std::max(0, num_digits - 3), ' ');
 
 	char buffer[1024];
