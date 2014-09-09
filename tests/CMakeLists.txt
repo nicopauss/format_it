@@ -17,7 +17,11 @@ include_directories(${PROJECT_SOURCE_DIR}/src)
 
 link_directories(${CMAKE_CURRENT_BINARY_DIR}/format_it)
 
-add_definitions(-std=gnu++11)
+if(CYGWIN)
+  add_definitions(-std=gnu++11)
+else(CYGWIN)
+  add_definitions(-std=c++11)
+endif(CYGWIN)
 
 add_executable(tests ${sources})
 
