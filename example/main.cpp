@@ -98,6 +98,6 @@ int main(int argc, char * argv[])
 
 	fmt::cout.print(print_both(print_through_ostream(), print_through_format_it())).print('\n');
 
-  return 0;
+    return 0;
 }
 
